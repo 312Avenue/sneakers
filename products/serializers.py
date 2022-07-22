@@ -57,7 +57,7 @@ class ProductSerializer(serializers.ModelSerializer):
         represent['favorites'] = FavoritesSerializer(instance.favorites.all(), many=True).data
         represent['rating'] = ReviewSerializer(instance.comments.all(), many=True).data
         represent['comments'] = ReviewSerializer(instance.comments.all(), many=True).data
-        rating = [dict(i)['rating'] for i in represent['rating']]
+        rating = [dict(i)['rating'] for i in represent['rating'] if dict(i)['rating'] != None]
         represent['like'] = sum([dict(i)['like'] for i in represent['like']])
         represent['favorites'] = sum([dict(i)['favorites'] for i in represent['favorites']])
         if rating:
